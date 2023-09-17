@@ -1,18 +1,18 @@
-import { ConfigProvider } from "antd";
+import classes from "./App.module.css";
 import Layout from "./components/Layout";
 
 export default function App() {
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          fontFamily: "'Euclid Circular A', system-ui, sans-serif",
-        },
-      }}
-    >
-      <Layout>
-        <h1>Hello World</h1>
-      </Layout>
-    </ConfigProvider>
+    <Layout>
+      <section className={classes.folders}>
+        <h4>Folders</h4>
+        <ul></ul>
+      </section>
+
+      <section className={classes.files}>
+        <h4>Files</h4>
+        <ul></ul>
+      </section>
+    </Layout>
   );
 }
