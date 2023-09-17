@@ -2,6 +2,7 @@ import { MenuProps } from "antd";
 import Dropdown from "../Dropdown";
 import classes from "./Layout.module.css";
 import { ReactNode } from "react";
+import SortIcon from "../../icons/SortIcon";
 
 interface Props {
   children: ReactNode;
@@ -11,7 +12,10 @@ export default function Layout(props: Props) {
   return (
     <div className={classes.container}>
       <header className={classes.header}>
-        <Dropdown menu={{ items: SORT_ITEMS }}>Sort</Dropdown>
+        <Dropdown menu={{ items: SORT_ITEMS }}>
+          <p>Sort</p>
+          <SortIcon />
+        </Dropdown>
       </header>
 
       <main className={classes.main}>{props.children}</main>
