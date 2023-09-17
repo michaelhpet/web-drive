@@ -3,6 +3,7 @@ import Dropdown from "../Dropdown";
 import classes from "./Layout.module.css";
 import { ReactNode } from "react";
 import SortIcon from "../../icons/SortIcon";
+import SearchIcon from "../../icons/SearchIcon";
 
 interface Props {
   children: ReactNode;
@@ -16,6 +17,11 @@ export default function Layout(props: Props) {
           <p>Sort</p>
           <SortIcon />
         </Dropdown>
+
+        <form className={classes.search_form}>
+          <SearchIcon />
+          <input type="text" placeholder="Search" />
+        </form>
       </header>
 
       <main className={classes.main}>{props.children}</main>
