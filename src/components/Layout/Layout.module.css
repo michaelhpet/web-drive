@@ -7,6 +7,38 @@
   padding: 24px;
 }
 
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav h3 {
+  font-weight: 900;
+}
+
+.nav .back_button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 6px;
+  border: 1px solid #e5e6e6;
+  background-color: transparent;
+  cursor: pointer;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 160%;
+  color: #5e6164;
+  transition: all 0.2s;
+}
+
+.back_button:active {
+  scale: 1.025;
+}
+
 .header {
   width: 100%;
   display: flex;

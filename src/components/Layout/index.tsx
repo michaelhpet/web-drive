@@ -1,9 +1,10 @@
-import { Button, MenuProps } from "antd";
+import { MenuProps } from "antd";
 import Dropdown from "../Dropdown";
 import classes from "./Layout.module.css";
 import { ReactNode } from "react";
 import SortIcon from "../../icons/SortIcon";
 import SearchIcon from "../../icons/SearchIcon";
+import ArrowLeftIcon from "../../icons/ArrowLeftIcon";
 
 interface Props {
   children: ReactNode;
@@ -13,8 +14,14 @@ export default function Layout(props: Props) {
   return (
     <div className={classes.container}>
       <nav className={classes.nav}>
-        <Button>Back</Button>
+        <button className={classes.back_button}>
+          <ArrowLeftIcon />
+          <p>Back</p>
+        </button>
+
+        <h3>Brunch Memories villa</h3>
       </nav>
+
       <header className={classes.header}>
         <Dropdown menu={{ items: SORT_ITEMS }}>
           <p>Sort</p>

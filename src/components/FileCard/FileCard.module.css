@@ -18,14 +18,67 @@
   cursor: unset;
 }
 
-.thumbnail_wrapper {
+.thumbnail_wrapper,
+.action_wrapper {
   position: relative;
   width: 100%;
   border-radius: 3px;
 }
 
-.thumbnail_wrapper img {
+.action_wrapper {
+  min-height: 215px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  border-radius: 3px;
+  background: #f2f5f7;
+}
+
+.action_wrapper .thumbnail {
+  width: 80px;
+  height: 80px;
+}
+
+.action_buttons {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.file:hover .action_buttons {
+  opacity: 1;
+}
+
+.thumbnail {
   width: 100%;
+}
+
+.button {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+}
+
+.button svg {
+  transition: all 0.15s;
+}
+
+.button:hover svg {
+  scale: 1.25;
 }
 
 .like_button_wrapper {
