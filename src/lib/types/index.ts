@@ -13,5 +13,6 @@ export interface FolderType {
   name: string;
   favourite: boolean;
   created_at: string;
-  contents: Array<FileType>;
+  contents: Array<FileType | FolderType>;
+  size: number;
 }

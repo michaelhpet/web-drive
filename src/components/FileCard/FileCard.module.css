@@ -20,13 +20,13 @@
 
 .thumbnail_wrapper,
 .action_wrapper {
+  flex-grow: 1;
   position: relative;
   width: 100%;
   border-radius: 3px;
 }
 
 .action_wrapper {
-  min-height: 215px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,6 +57,9 @@
 
 .thumbnail {
   width: 100%;
+  min-height: 100%;
+  max-height: 215px;
+  object-fit: cover;
 }
 
 .button {

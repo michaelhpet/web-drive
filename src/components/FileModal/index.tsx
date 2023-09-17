@@ -1,13 +1,19 @@
 import CancelIcon from "../../icons/CancelIcon";
 import DownloadIcon from "../../icons/DownloadIcon";
+import { FileType } from "../../lib/types";
 import FileCard from "../FileCard";
 import classes from "./FileModal.module.css";
 import { Modal as AntdModal, ModalProps } from "antd";
 
-export default function FileModal(props: ModalProps) {
+interface Props extends ModalProps {
+  file: FileType;
+}
+
+export default function FileModal(props: Props) {
+  const { file, ...restProps } = props;
   return (
     <AntdModal
-      {...props}
+      {...restProps}
       width={691}
       rootClassName={classes.root}
       wrapClassName={classes.modal}
@@ -24,7 +30,7 @@ export default function FileModal(props: ModalProps) {
       </nav>
 
       <div className={classes.content}>
-        <FileCard flat />
+        <FileCard flat {...file} />
       </div>
     </AntdModal>
   );
