@@ -1,4 +1,4 @@
-import { MenuProps } from "antd";
+import { Button, MenuProps } from "antd";
 import Dropdown from "../Dropdown";
 import classes from "./Layout.module.css";
 import { ReactNode } from "react";
@@ -12,6 +12,9 @@ interface Props {
 export default function Layout(props: Props) {
   return (
     <div className={classes.container}>
+      <nav className={classes.nav}>
+        <Button>Back</Button>
+      </nav>
       <header className={classes.header}>
         <Dropdown menu={{ items: SORT_ITEMS }}>
           <p>Sort</p>
