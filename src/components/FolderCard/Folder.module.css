@@ -1,0 +1,40 @@
+.folder {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 0.7px solid #eff0f0;
+  cursor: pointer;
+}
+
+.folder figure {
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f2f2f3;
+  border-radius: 50%;
+}
+
+.folder article {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+}
+
+.folder article p {
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  color: #6f7376;
+}
+
+.folder article p:first-child {
+  font-size: 14px;
+  font-weight: 500;
+}
