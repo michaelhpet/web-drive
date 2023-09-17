@@ -1,4 +1,4 @@
-import classes from "./Folder.module.css";
+import classes from "./FolderCard.module.css";
 import FolderIcon from "../../icons/FolderIcon";
 
 export default function FolderCard() {
