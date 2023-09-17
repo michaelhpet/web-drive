@@ -1,5 +1,5 @@
 import { MONTHS } from "../constants";
-import { FileType, FolderType } from "../types";
+import { FileMeta, FileType, FolderType } from "../types";
 
 /**
  * Get date in words
@@ -61,4 +61,25 @@ export function getBytesInWord(bytes: number): string {
   if (log > 5) suffix = "gb";
 
   return (bytes / Math.pow(10, log)).toFixed(2) + suffix;
+}
+
+export function getFileCategory(name: string): FileMeta["category"] {
+  const ext = name.split(".")?.at(-1) ?? "";
+  if (["jpg", "png", "jpeg", "webp"].includes(ext)) return "image";
+  if (["xls", "xlsx"].includes(ext)) return "sheets";
+  if (ext === "pdf") return "pdf";
+  return "file";
+}
+
+export function getFilename(name: string): string {
+  const tokens = name.split(".");
+
+  const newTokens = [];
+  for (let i = 0; i < tokens.length - 1; i++) {
+    newTokens.push(tokens[i]);
+  }
+
+  if (!newTokens.length) return name;
+
+  return newTokens.join(" ");
 }

@@ -3,14 +3,17 @@ import modalClasses from "../FileModal/FileModal.module.css";
 import imageIcon from "../../images/image_icon.png";
 import pdfIcon from "../../images/pdf_icon.png";
 import sheetsIcon from "../../images/sheets_icon.png";
+import fileIcon from "../../images/file_icon.svg";
 import { useState } from "react";
 import FileModal from "../FileModal";
 import DownloadIcon from "../../icons/DownloadIcon";
 import PrintIcon from "../../icons/PrintIcon";
 import HeartFilledIcon from "../../icons/HeartFilledIcon";
 import HeartIcon from "../../icons/HeartIcon";
-import { FileType } from "../../lib/types";
-import { getDateInWords } from "../../lib/utils";
+import { FileMeta, FileType } from "../../lib/types";
+import { getDateInWords, getFileCategory, getFilename } from "../../lib/utils";
+import { Image } from "antd";
+import { FALLBACK_IMAGE_SRC } from "../../lib/constants";
 
 interface Props extends FileType {
   flat?: boolean;
@@ -33,10 +36,12 @@ export default function FileCard(props: Props) {
       >
         {fileMeta.category === "image" ? (
           <figure className={classes.thumbnail_wrapper}>
-            <img
+            <Image
               src={file.src}
               alt={filename + " " + fileMeta.category}
               className={classes.thumbnail}
+              preview={false}
+              fallback={FALLBACK_IMAGE_SRC}
               {...(flat ? { style: { minHeight: 392, maxHeight: 392 } } : {})}
             />
 
@@ -95,32 +100,9 @@ export default function FileCard(props: Props) {
   );
 }
 
-interface FileMeta {
-  category: "image" | "pdf" | "sheets";
-  color: string;
-  icon: HTMLImageElement["src"];
-}
-
 const FILE_METAS: Record<FileMeta["category"], FileMeta> = {
   image: { category: "image", color: "#FFF7E5", icon: imageIcon },
   pdf: { category: "pdf", color: "#FFEBEB", icon: pdfIcon },
   sheets: { category: "sheets", color: "#EBFAF3", icon: sheetsIcon },
+  file: { category: "file", color: "#EBFAF3", icon: fileIcon },
 };
-
-function getFileCategory(name: string): FileMeta["category"] {
-  const ext = name.split(".")?.at(-1) ?? "";
-  if (["jpg", "png", "jpeg", "webp", "svg"].includes(ext)) return "image";
-  if (["xls", "xlsx"].includes(ext)) return "sheets";
-  return "pdf";
-}
-
-function getFilename(name: string): string {
-  const tokens = name.split(".");
-
-  const newTokens = [];
-  for (let i = 0; i < tokens.length - 1; i++) {
-    newTokens.push(tokens[i]);
-  }
-
-  return newTokens.join(" ");
-}

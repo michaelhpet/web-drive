@@ -16,3 +16,9 @@ export interface FolderType {
   contents: Array<FileType | FolderType>;
   size: number;
 }
+
+export interface FileMeta {
+  category: "image" | "pdf" | "sheets" | "file";
+  color: string;
+  icon: HTMLImageElement["src"];
+}

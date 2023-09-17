@@ -12,7 +12,7 @@ interface GetFilesType {
 
 export function useGetFiles(folderId?: string): GetFilesType {
   let endpoint = "https://fc-test.onrender.com";
-  if (folderId) endpoint += "/files/" + folderId;
+  if (folderId) endpoint += "/file/" + folderId;
 
   const [sortKey, setSortKey] = useState<"name" | "date">("date");
   const {
