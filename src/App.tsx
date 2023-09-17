@@ -25,7 +25,11 @@ export default function App() {
               ))}
           </ul>
         ) : (
-          <ul>
+          <ul
+            {...(!Boolean(folders.length)
+              ? { style: { display: "block" } }
+              : {})}
+          >
             {Boolean(folders.length) ? (
               folders.map((folder) => <Folder key={folder.id} {...folder} />)
             ) : (
@@ -46,7 +50,9 @@ export default function App() {
               ))}
           </ul>
         ) : (
-          <ul>
+          <ul
+            {...(!Boolean(files.length) ? { style: { display: "block" } } : {})}
+          >
             {Boolean(files.length) ? (
               files.map((file) => <File key={file.id} {...file} />)
             ) : (
