@@ -1,4 +1,5 @@
 import classes from "./App.module.css";
+import FileCard from "./components/FileCard";
 import FolderCard from "./components/FolderCard";
 import Layout from "./components/Layout";
 
@@ -18,7 +19,14 @@ export default function App() {
 
       <section className={classes.files}>
         <h4>Files</h4>
-        <ul></ul>
+        <ul>
+          <FileCard />
+          <FileCard />
+          <FileCard />
+          <FileCard />
+          <FileCard />
+          <FileCard />
+        </ul>
       </section>
     </Layout>
   );

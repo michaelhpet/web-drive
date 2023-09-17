@@ -1,0 +1,21 @@
+.button {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+}
+
+.button svg {
+  transition: all 0.15s;
+}
+
+.button:hover svg {
+  scale: 1.25;
+}
