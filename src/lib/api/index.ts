@@ -1,7 +1,8 @@
 import useSWR from "swr";
 import { FileType, FolderType } from "../types";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../state";
+import axios from "axios";
 
 interface GetFilesType {
   files: Array<FileType>;
@@ -96,4 +97,36 @@ function sortData<T extends FileType | FolderType>(
     const bTime = new Date(b.created_at).getTime();
     return aTime - bTime;
   });
+}
+
+export function useDownloadFile() {
+  const [downloaded, setDownloaded] = useState(0);
+
+  /**
+   * Download a file with real-time progress (in bytes)
+   * @param src URL to file to download
+   * @param filename Filename to save once download is completed
+   */
+  async function downloader(src: string, filename: string) {
+    const response = await axios.get(src, {
+      responseType: "blob",
+      onDownloadProgress(progressEvent) {
+        setDownloaded(progressEvent.loaded);
+      },
+    });
+
+    const href = URL.createObjectURL(response.data);
+    const linkElement = document.createElement("a");
+    linkElement.href = href;
+    linkElement.setAttribute("download", filename);
+    document.body.appendChild(linkElement);
+    linkElement.click();
+    document.body.removeChild(linkElement);
+    URL.revokeObjectURL(href);
+  }
+
+  return {
+    downloaded,
+    download: (src: string, filename: string) => downloader(src, filename),
+  };
 }
