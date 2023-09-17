@@ -16,7 +16,7 @@ interface Props {
 }
 
 export default function FileCard(props: Props) {
-  const fileType = FILE_TYPES.sheets;
+  const fileType = FILE_TYPES.image;
   const [isOpen, setIsOpen] = useState(false);
 
   return (

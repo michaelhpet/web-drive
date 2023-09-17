@@ -5,21 +5,34 @@ import { ReactNode } from "react";
 import SortIcon from "../../icons/SortIcon";
 import SearchIcon from "../../icons/SearchIcon";
 import ArrowLeftIcon from "../../icons/ArrowLeftIcon";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface Props {
   children: ReactNode;
 }
 
 export default function Layout(props: Props) {
+  const { folderId } = useParams();
+  const navigate = useNavigate();
+
   return (
     <div className={classes.container}>
       <nav className={classes.nav}>
-        <button className={classes.back_button}>
-          <ArrowLeftIcon />
-          <p>Back</p>
-        </button>
+        {Boolean(folderId) ? (
+          <>
+            <button
+              className={classes.back_button}
+              onClick={() => navigate(-1)}
+            >
+              <ArrowLeftIcon />
+              <p>Back</p>
+            </button>
 
-        <h3>Brunch Memories villa</h3>
+            <h3>Brunch Memories villa</h3>
+          </>
+        ) : (
+          <div style={{ width: 0, height: 40 }} />
+        )}
       </nav>
 
       <header className={classes.header}>
