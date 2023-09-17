@@ -6,6 +6,9 @@
   border-radius: 6px;
   border: 0.7px solid #eff0f0;
   cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .folder figure {

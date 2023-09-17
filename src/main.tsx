@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { ConfigProvider } from "antd";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { AppContextProvider } from "./lib/state/index.tsx";
 
 const router = createBrowserRouter(
   ["/", "/:folderId"].map((path) => ({
@@ -24,6 +25,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AppContextProvider>
+      <RouterProvider router={router} />
+    </AppContextProvider>
   </React.StrictMode>
 );

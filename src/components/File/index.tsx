@@ -1,25 +1,22 @@
-import classes from "./FileCard.module.css";
-import modalClasses from "../FileModal/FileModal.module.css";
+import classes from "./styles.module.css";
 import imageIcon from "../../images/image_icon.png";
 import pdfIcon from "../../images/pdf_icon.png";
 import sheetsIcon from "../../images/sheets_icon.png";
 import fileIcon from "../../images/file_icon.svg";
 import { useState } from "react";
-import FileModal from "../FileModal";
+import FileModal from "./FileModal";
 import DownloadIcon from "../../icons/DownloadIcon";
 import PrintIcon from "../../icons/PrintIcon";
 import HeartFilledIcon from "../../icons/HeartFilledIcon";
 import HeartIcon from "../../icons/HeartIcon";
 import { FileMeta, FileType } from "../../lib/types";
 import { getDateInWords, getFileCategory, getFilename } from "../../lib/utils";
-import { Image } from "antd";
-import { FALLBACK_IMAGE_SRC } from "../../lib/constants";
 
 interface Props extends FileType {
   flat?: boolean;
 }
 
-export default function FileCard(props: Props) {
+export default function File(props: Props) {
   const { flat, ...file } = props;
   const filename = getFilename(file.name);
   const fileCategory = getFileCategory(file.name);
@@ -30,18 +27,16 @@ export default function FileCard(props: Props) {
     <>
       <li
         className={flat ? classes.flat_card : classes.file}
-        onClick={() =>
+        onDoubleClick={() =>
           fileMeta.category === "image" && !flat && setIsOpen(true)
         }
       >
         {fileMeta.category === "image" ? (
           <figure className={classes.thumbnail_wrapper}>
-            <Image
+            <img
               src={file.src}
               alt={filename + " " + fileMeta.category}
               className={classes.thumbnail}
-              preview={false}
-              fallback={FALLBACK_IMAGE_SRC}
               {...(flat ? { style: { minHeight: 392, maxHeight: 392 } } : {})}
             />
 
@@ -66,10 +61,10 @@ export default function FileCard(props: Props) {
             />
 
             <div className={classes.action_buttons}>
-              <button className={modalClasses.download_button}>
+              <button className={classes.download_button}>
                 <DownloadIcon />
               </button>
-              <button className={modalClasses.download_button}>
+              <button className={classes.download_button}>
                 <PrintIcon />
               </button>
             </div>
@@ -106,3 +101,5 @@ const FILE_METAS: Record<FileMeta["category"], FileMeta> = {
   sheets: { category: "sheets", color: "#EBFAF3", icon: sheetsIcon },
   file: { category: "file", color: "#EBFAF3", icon: fileIcon },
 };
+
+export { default as SkeletonFileCard } from "./SkeletonFile";

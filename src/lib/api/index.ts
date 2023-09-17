@@ -1,20 +1,22 @@
 import useSWR from "swr";
 import { FileType, FolderType } from "../types";
-import { useState } from "react";
+import { useContext } from "react";
+import { AppContext } from "../state";
 
 interface GetFilesType {
   files: Array<FileType>;
   folders: Array<FolderType>;
   loading: boolean;
-  sortKey?: "name" | "date";
-  setSortKey?: (args?: any) => any;
+  sortKey: "name" | "date";
+  setSortKey: (args?: any) => any;
 }
 
 export function useGetFiles(folderId?: string): GetFilesType {
   let endpoint = "https://fc-test.onrender.com";
   if (folderId) endpoint += "/file/" + folderId;
 
-  const [sortKey, setSortKey] = useState<"name" | "date">("date");
+  const { sortKey, setSortKey } = useContext(AppContext);
+
   const {
     data,
     isLoading: loading,
@@ -78,7 +80,6 @@ async function fetcher([url]: Array<string>): Promise<Array<any>> {
 
     return data;
   } catch (error) {
-    console.log("error occurred", error);
     return [];
   }
 }
@@ -87,14 +88,12 @@ function sortData<T extends FileType | FolderType>(
   data: Array<T>,
   sortKey: "name" | "date"
 ): Array<T> {
-  if (sortKey === "name") return data.sort();
+  if (sortKey === "name")
+    return data.sort((a, b) => a.name.localeCompare(b.name));
 
   return data.sort((a, b) => {
     const aTime = new Date(a.created_at).getTime();
     const bTime = new Date(b.created_at).getTime();
-
-    if (aTime < bTime) return -1;
-    else if (aTime > bTime) return 1;
-    return 0;
+    return aTime - bTime;
   });
 }

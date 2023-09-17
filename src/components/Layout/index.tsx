@@ -1,11 +1,12 @@
 import { MenuProps } from "antd";
 import Dropdown from "../Dropdown";
-import classes from "./Layout.module.css";
-import { ReactNode } from "react";
+import classes from "./styles.module.css";
+import { ReactNode, useContext } from "react";
 import SortIcon from "../../icons/SortIcon";
 import SearchIcon from "../../icons/SearchIcon";
 import ArrowLeftIcon from "../../icons/ArrowLeftIcon";
 import { useNavigate, useParams } from "react-router-dom";
+import { AppContext } from "../../lib/state";
 
 interface Props {
   children: ReactNode;
@@ -14,6 +15,7 @@ interface Props {
 export default function Layout(props: Props) {
   const { folderId } = useParams();
   const navigate = useNavigate();
+  const { dirNames, setSortKey } = useContext(AppContext);
 
   return (
     <div className={classes.container}>
@@ -28,7 +30,7 @@ export default function Layout(props: Props) {
               <p>Back</p>
             </button>
 
-            <h3>Brunch Memories villa</h3>
+            {folderId ? <h3>{dirNames[folderId]}</h3> : null}
           </>
         ) : (
           <div style={{ width: 0, height: 40 }} />
@@ -36,7 +38,7 @@ export default function Layout(props: Props) {
       </nav>
 
       <header className={classes.header}>
-        <Dropdown menu={{ items: SORT_ITEMS }}>
+        <Dropdown menu={{ items: getSortItems(setSortKey) }}>
           <p>Sort</p>
           <SortIcon />
         </Dropdown>
@@ -52,7 +54,13 @@ export default function Layout(props: Props) {
   );
 }
 
-const SORT_ITEMS: MenuProps["items"] = [
-  { key: "name", label: "By name" },
-  { key: "time", label: "By time created" },
-];
+function getSortItems(setSortKey: (args?: any) => any): MenuProps["items"] {
+  return [
+    { key: "name", label: "By name", onClick: () => setSortKey("name") },
+    {
+      key: "time",
+      label: "By time created",
+      onClick: () => setSortKey("time"),
+    },
+  ];
+}

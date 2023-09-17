@@ -1,8 +1,8 @@
 import CancelIcon from "../../icons/CancelIcon";
 import DownloadIcon from "../../icons/DownloadIcon";
 import { FileType } from "../../lib/types";
-import FileCard from "../FileCard";
-import classes from "./FileModal.module.css";
+import FileCard from ".";
+import classes from "./styles.module.css";
 import { Modal as AntdModal, ModalProps } from "antd";
 
 interface Props extends ModalProps {
@@ -15,7 +15,7 @@ export default function FileModal(props: Props) {
     <AntdModal
       {...restProps}
       width={691}
-      rootClassName={classes.root}
+      rootClassName={classes.modal_root}
       wrapClassName={classes.modal}
     >
       <nav>

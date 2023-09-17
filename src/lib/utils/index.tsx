@@ -13,9 +13,12 @@ export function getDateInWords(d: string): string {
   const year = dateObject.getFullYear();
 
   let dateSuffix = "th";
-  if (date === 1) dateSuffix = "st";
-  if (date === 2) dateSuffix = "nd";
-  if (date === 3) dateSuffix = "rd";
+
+  if (date < 10 || date > 19) {
+    if (date.toString().endsWith("1")) dateSuffix = "st";
+    if (date.toString().endsWith("2")) dateSuffix = "nd";
+    if (date.toString().endsWith("3")) dateSuffix = "rd";
+  }
 
   return `${date}${dateSuffix} ${month}, ${year}`;
 }
