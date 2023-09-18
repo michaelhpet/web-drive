@@ -22,3 +22,7 @@ export interface FileMeta {
   color: string;
   icon: HTMLImageElement["src"];
 }
+
+export interface FileDownloadInfo extends FileMeta {
+  filename: string;
+}

@@ -11,3 +11,15 @@
   -webkit-text-size-adjust: 100%;
   color: #2e3031;
 }
+
+.ant-message-notice-content {
+  position: fixed !important;
+  top: 0 !important;
+  right: 24px !important;
+  min-width: 322px !important;
+  padding: 12px !important;
+  border-radius: 6px !important;
+  background: #ffffff !important;
+  box-shadow: 0px 0px 14.00499px 0px rgba(0, 0, 0, 0.1) !important;
+  font-family: "Euclid Circular A", system-ui, sans-serif !important;
+}

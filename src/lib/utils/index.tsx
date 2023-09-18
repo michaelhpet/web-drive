@@ -57,7 +57,7 @@ export async function getFolderSize(folder: FolderType, bytes: number = 0) {
 }
 
 export function getBytesInWord(bytes: number): string {
-  const log = bytes ? Math.round(Math.log10(bytes)) : 1;
+  const log = bytes ? Math.floor(Math.log10(bytes)) : 1;
   let suffix = "kb";
 
   if (log > 2) suffix = "mb";

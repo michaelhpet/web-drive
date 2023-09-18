@@ -1,8 +1,11 @@
 import useSWR from "swr";
-import { FileType, FolderType } from "../types";
-import { useContext, useState } from "react";
+import { FileDownloadInfo, FileType, FolderType } from "../types";
+import { useContext } from "react";
 import { AppContext } from "../state";
 import axios from "axios";
+import { getBytesInWord } from "../utils";
+import { message } from "antd";
+import DownloadFile from "../../components/File/DownloadFile";
 
 interface GetFilesType {
   files: Array<FileType>;
@@ -100,33 +103,48 @@ function sortData<T extends FileType | FolderType>(
 }
 
 export function useDownloadFile() {
-  const [downloaded, setDownloaded] = useState(0);
-
   /**
    * Download a file with real-time progress (in bytes)
    * @param src URL to file to download
    * @param filename Filename to save once download is completed
    */
-  async function downloader(src: string, filename: string) {
+  async function downloader(src: string, options: FileDownloadInfo) {
+    message.open({
+      key: "progress",
+      content: <DownloadFile {...options} />,
+      duration: 0,
+    });
     const response = await axios.get(src, {
       responseType: "blob",
-      onDownloadProgress(progressEvent) {
-        setDownloaded(progressEvent.loaded);
+      onDownloadProgress: (progressEvent) => {
+        if (document) {
+          const progressElement = document.getElementById("download-progress");
+          if (progressElement && progressEvent.loaded)
+            progressElement.innerHTML = `${getBytesInWord(
+              progressEvent.loaded
+            )} &bull; ${Math.round(
+              (progressEvent.loaded * 100) /
+                (progressEvent.total || progressEvent.loaded)
+            )}% done`;
+        }
       },
     });
 
     const href = URL.createObjectURL(response.data);
     const linkElement = document.createElement("a");
     linkElement.href = href;
-    linkElement.setAttribute("download", filename);
+    linkElement.setAttribute("download", options.filename);
     document.body.appendChild(linkElement);
     linkElement.click();
     document.body.removeChild(linkElement);
     URL.revokeObjectURL(href);
+
+    if (window) {
+      setTimeout(() => {
+        message.destroy("progress");
+      }, 5000);
+    }
   }
 
-  return {
-    downloaded,
-    download: (src: string, filename: string) => downloader(src, filename),
-  };
+  return downloader;
 }

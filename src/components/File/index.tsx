@@ -11,6 +11,7 @@ import HeartFilledIcon from "../../icons/HeartFilledIcon";
 import HeartIcon from "../../icons/HeartIcon";
 import { FileMeta, FileType } from "../../lib/types";
 import { getDateInWords, getFileCategory, getFilename } from "../../lib/utils";
+import { useDownloadFile } from "../../lib/api";
 
 interface Props extends FileType {
   flat?: boolean;
@@ -22,6 +23,7 @@ export default function File(props: Props) {
   const fileCategory = getFileCategory(file.name);
   const fileMeta = FILE_METAS[fileCategory];
   const [isOpen, setIsOpen] = useState(false);
+  const download = useDownloadFile();
 
   return (
     <>
@@ -61,10 +63,20 @@ export default function File(props: Props) {
             />
 
             <div className={classes.action_buttons}>
-              <button className={classes.download_button}>
+              <button
+                className={classes.download_button}
+                onClick={() =>
+                  download(file.src, { ...fileMeta, filename: file.name })
+                }
+              >
                 <DownloadIcon />
               </button>
-              <button className={classes.download_button}>
+              <button
+                className={classes.download_button}
+                onClick={() =>
+                  download(file.src, { ...fileMeta, filename: file.name })
+                }
+              >
                 <PrintIcon />
               </button>
             </div>
@@ -90,6 +102,7 @@ export default function File(props: Props) {
         closeIcon={null}
         footer={null}
         file={file}
+        fileMeta={fileMeta}
       />
     </>
   );

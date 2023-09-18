@@ -120,6 +120,7 @@
 }
 
 .details article p {
+  font-family: inherit;
   font-style: normal;
   font-size: 12px;
   font-weight: 400;
