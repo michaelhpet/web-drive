@@ -1,4 +1,4 @@
-export const API_URL = "https://fc-test.getfoodcourt.com/";
+export const API_URL = "https://fc-test.getfoodcourt.com";
 
 export const MONTHS = [
   "January",

@@ -7,7 +7,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { AppContextProvider } from "./lib/state/index.tsx";
 
 const router = createBrowserRouter(
-  ["/", "/:folderId"].map((path) => ({
+  ["/", "/:folderId", "*"].map((path) => ({
     path,
     element: (
       <ConfigProvider
