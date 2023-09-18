@@ -58,12 +58,13 @@ export async function getFolderSize(folder: FolderType, bytes: number = 0) {
 
 export function getBytesInWord(bytes: number): string {
   const log = bytes ? Math.floor(Math.log10(bytes)) : 1;
+  const thousands = Math.floor(log / 3);
   let suffix = "kb";
 
-  if (log > 2) suffix = "mb";
-  if (log > 5) suffix = "gb";
+  if (thousands > 2) suffix = "gb";
+  if (thousands > 1) suffix = "mb";
 
-  return (bytes / Math.pow(10, log)).toFixed(2) + suffix;
+  return (bytes / Math.pow(1000, thousands)).toFixed(2) + suffix;
 }
 
 export function getFileCategory(name: string): FileMeta["category"] {
