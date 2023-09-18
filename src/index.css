@@ -12,6 +12,10 @@
   color: #2e3031;
 }
 
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .ant-message-notice-content {
   position: fixed !important;
   top: 0 !important;
