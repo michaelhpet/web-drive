@@ -2,6 +2,10 @@
 
 A simple file directory system that displays a list of [nested] folders and files with intuitive file-systems actions such as viewing, navigation, and download.
 
+### UI Preview
+
+![UI Preview](/public/preview.png)
+
 ### Files requirements
 
 - Files can be images or documents
@@ -12,7 +16,7 @@ A simple file directory system that displays a list of [nested] folders and file
 
 - Folders can contain other folders and files
 
-### Design and Functionality
+### Functionality
 
 - Folders show at the top and files below
 - Double clicking an image file previews the file
