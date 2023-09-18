@@ -6,6 +6,7 @@ import axios from "axios";
 import { getBytesInWord } from "../utils";
 import { message } from "antd";
 import DownloadFile from "../../components/File/DownloadFile";
+import { API_URL } from "../constants";
 
 interface GetFilesType {
   files: Array<FileType>;
@@ -16,7 +17,7 @@ interface GetFilesType {
 }
 
 export function useGetFiles(folderId?: string): GetFilesType {
-  let endpoint = "https://fc-test.onrender.com";
+  let endpoint = API_URL;
   if (folderId) endpoint += "/file/" + folderId;
 
   const { sortKey, setSortKey } = useContext(AppContext);
