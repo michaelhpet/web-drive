@@ -30,7 +30,9 @@ export default function File(props: Props) {
       <li
         className={flat ? classes.flat_card : classes.file}
         onDoubleClick={() =>
-          fileMeta.category === "image" && !flat && setIsOpen(true)
+          fileMeta.category === "image" && !flat
+            ? setIsOpen(true)
+            : download(file.src, { ...fileMeta, filename: file.name })
         }
       >
         {fileMeta.category === "image" ? (
