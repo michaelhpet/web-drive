@@ -1,4 +1,4 @@
-export const API_URL = "http://ec2-44-203-95-204.compute-1.amazonaws.com:3001";
+export const API_URL = "https://fc-test.getfoodcourt.com/";
 
 export const MONTHS = [
   "January",
